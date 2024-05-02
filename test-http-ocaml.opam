@@ -19,6 +19,9 @@ depends: [
   "uri"
   "h2"
   "httpaf"
+  "eio"
+  "eio_main"
+  "cohttp-eio"
   "odoc" {with-doc}
 ]
 build: [

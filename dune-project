@@ -33,4 +33,7 @@
   uri
   h2
   httpaf
+  eio
+  eio_main
+  cohttp-eio
 ))

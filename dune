@@ -1,14 +1,14 @@
 (executable
- (name server_cohttp)
- (modules server_cohttp)
+ (name test_cohttp)
+ (modules test_cohttp)
  (libraries cohttp-eio eio eio.core eio_main uri eio.unix mem_usage))
 
 (executable
- (name server_blink)
- (modules server_blink)
+ (name test_blink)
+ (modules test_blink)
  (libraries riot rio blink uri http unix lwt.unix mem_usage))
 
 (executable
-  (name server_piaf)
-  (modules server_piaf)
+  (name test_piaf)
+  (modules test_piaf)
   (libraries httpaf eio eio_main piaf eio.core lwt uri unix lwt.unix mem_usage))
