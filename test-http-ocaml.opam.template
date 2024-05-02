@@ -1,16 +1,4 @@
 pin-depends: [
-  # piaf
-  # [ "gluten.dev" "git+https://github.com/anmonteiro/gluten.git" ]
-  # [ "gluten-eio.dev" "git+https://github.com/anmonteiro/gluten.git" ]
-  # [ "httpaf.dev" "git+https://github.com/anmonteiro/httpaf.git" ]
-  # [ "httpaf-eio.dev" "git+https://github.com/anmonteiro/httpaf.git" ]
-  # [ "hpack.dev" "git+https://github.com/anmonteiro/ocaml-h2.git" ]
-  # [ "h2.dev" "git+https://github.com/anmonteiro/ocaml-h2.git" ]
-  # [ "h2-eio.dev" "git+https://github.com/anmonteiro/ocaml-h2.git" ]
-  # [ "ssl.dev" "git+https://github.com/savonet/ocaml-ssl.git" ]
-  # [ "eio-ssl.dev" "git+https://github.com/anmonteiro/eio-ssl.git" ]
-  # [ "websocketaf.dev" "git+https://github.com/anmonteiro/websocketaf.git" ]
-  # [ "multipart_form.dev" "git+https://github.com/anmonteiro/multipart_form.git" ]
   [ "piaf.dev" "git+https://github.com/anmonteiro/piaf.git#be293120270ba5af7a8d1d84f29529c34b6a1389" ]
 
   [ "blink.dev" "git+https://github.com/suri-framework/blink.git#7e260936991246fb96fea8dec019fd67fca44659" ]

@@ -27,4 +27,11 @@
   ocamlformat
   ocaml-lsp-server
   riot
+  lwt
+  lwt_ppx
+  http
+  mem_usage
+  uri
+  h2
+  httpaf
 ))
