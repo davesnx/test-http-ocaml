@@ -1,11 +1,3 @@
-(* let fetch host =
-   let reply _response () _data = Lwt.return () in
-   match%lwt Http_lwt_client.request ~follow_redirect:false host reply () with
-   | Ok (_resp, ()) -> Lwt.return ()
-   | Error (`Msg msg) ->
-       Printf.printf "error %s" msg;
-       Lwt.return () *)
-
 open Piaf
 
 let fetch ~sw env url () =
@@ -14,10 +6,9 @@ let fetch ~sw env url () =
   | Error e -> failwith (Error.to_string e)
 
 let () =
-  let server = "http://localhost:55543" in
+  let server = "http://localhost:57757" in
   let total = ref 0 in
   let batch = 50 in
-  let _delay = 0. in
   let until = 15_000 in
 
   let rec fetch_loop env ~sw =
