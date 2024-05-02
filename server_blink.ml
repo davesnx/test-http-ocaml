@@ -1,8 +1,7 @@
 open Riot
 
-let ( let* ) = Result.bind
-
 let fetch host =
+  let ( let* ) = Result.bind in
   let url = Uri.of_string host in
   let* conn = Blink.connect url in
   let req = Http.Request.make "/" in

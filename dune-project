@@ -18,15 +18,14 @@
 (implicit_transitive_deps false)
 
 (package
+ (allow_empty true)
  (name test-http-ocaml)
  (synopsis "test-http-ocaml ???")
- (allow_empty true)
  (description "test-http-ocaml ???")
  (depends
-  (ocaml (> 5.1.0))
+  ocaml
   ocamlformat
   ocaml-lsp-server
-  riot
   lwt
   lwt_ppx
   http

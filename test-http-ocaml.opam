@@ -9,10 +9,9 @@ homepage: "https://github.com/davesnx/test-http-ocaml"
 bug-reports: "https://github.com/davesnx/test-http-ocaml/issues"
 depends: [
   "dune" {>= "3.8"}
-  "ocaml" {> "5.1.0"}
+  "ocaml"
   "ocamlformat"
   "ocaml-lsp-server"
-  "riot"
   "lwt"
   "lwt_ppx"
   "http"
