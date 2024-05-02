@@ -1,5 +1,4 @@
 pin-depends: [
   [ "piaf.dev" "git+https://github.com/anmonteiro/piaf.git#be293120270ba5af7a8d1d84f29529c34b6a1389" ]
-
   [ "blink.dev" "git+https://github.com/suri-framework/blink.git#7e260936991246fb96fea8dec019fd67fca44659" ]
 ]
