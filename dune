@@ -1,0 +1,6 @@
+(executable
+ (name server_http_lwt_client)
+ (modules server_http_lwt_client)
+ (libraries h2 http-lwt-client lwt uri unix lwt.unix mem_usage)
+ (preprocess
+  (pps lwt_ppx)))
