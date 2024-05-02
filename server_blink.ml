@@ -15,7 +15,7 @@ let fetch host =
       Ok ()
 
 let _ =
-  let server = "http://localhost:55795" in
+  let server = Array.get Sys.argv 1 in
   let total = ref 0 in
   let batch = 50 in
 

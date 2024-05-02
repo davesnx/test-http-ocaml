@@ -6,7 +6,7 @@ let fetch ~sw env url () =
   | Error e -> failwith (Error.to_string e)
 
 let () =
-  let server = "http://localhost:57757" in
+  let server = Array.get Sys.argv 1 in
   let total = ref 0 in
   let batch = 50 in
   let until = 15_000 in
