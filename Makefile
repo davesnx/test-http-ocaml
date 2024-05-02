@@ -45,8 +45,8 @@ init: create-switch install ## Create a local dev enviroment
 
 .PHONY: run
 run: ## Run executable
-	$(DUNE) exec ./server_http_lwt_client.exe
+	$(DUNE) exec ./server_piaf.exe
 
 .PHONY: run-watch
 run-watch: ## Run run executable
-	$(DUNE) exec -w ./server_http_lwt_client.exe
+	$(DUNE) exec -w ./server_piaf.exe

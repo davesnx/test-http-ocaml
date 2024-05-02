@@ -24,7 +24,6 @@ let _ =
         (Mem_usage.prettify_bytes usage.process_private_memory)
         !total
     in
-    let%lwt _ = fetch server in
     if !total >= until then Lwt.return () else fetch_loop ()
   in
 

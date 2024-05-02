@@ -23,12 +23,8 @@
  (allow_empty true)
  (description "test-http-ocaml ???")
  (depends
-  (ocaml (>= 5.0.0))
-
-  ;; Dev dependencies
-  (ocamlformat
-   (and
-    (= 0.26.1)
-    :with-dev-setup))
-  (ocaml-lsp-server :with-dev-setup)
+  (ocaml (> 5.1.0))
+  ocamlformat
+  ocaml-lsp-server
+  riot
 ))

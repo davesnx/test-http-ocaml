@@ -1,6 +1,20 @@
+; (executable
+ ; (name server_http_lwt_client)
+ ; (modules server_http_lwt_client)
+ ; (libraries httpaf http-lwt-client lwt uri unix lwt.unix mem_usage)
+ ; (preprocess
+  ; (pps lwt_ppx)))
+
 (executable
- (name server_http_lwt_client)
- (modules server_http_lwt_client)
- (libraries httpaf http-lwt-client lwt uri unix lwt.unix mem_usage)
+ (name server_blink)
+ (modules server_blink)
+ (libraries riot rio blink uri http unix lwt.unix mem_usage)
  (preprocess
   (pps lwt_ppx)))
+
+(executable
+  (name server_piaf)
+  (modules server_piaf)
+  (libraries httpaf eio eio_main piaf eio.core lwt uri unix lwt.unix mem_usage)
+  (preprocess
+   (pps lwt_ppx)))
