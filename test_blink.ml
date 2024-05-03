@@ -18,18 +18,17 @@ let _ =
     let total = ref 0 in
     let batch = 10 in
     let until = 100 in
-
-    let make_calls _ =
+    let rec fetch_loop () =
       let tasks =
         List.init batch (fun _ -> Riot.Task.async (fun () -> fetch server))
       in
-      List.map Riot.Task.await tasks |> ignore;
       let usage = Mem_usage.info () in
+      List.iter (fun t -> Riot.Task.await t |> ignore) tasks;
+      total := !total + batch;
       Printf.printf "mem usage %s after %d fetch\n%!"
         (Mem_usage.prettify_bytes usage.process_private_memory)
-        !total
+        !total;
+      if !total >= until then Riot.shutdown () else fetch_loop ()
     in
 
-    Riot.run @@ fun () ->
-    let _ = List.init until make_calls in
-    Riot.shutdown ()
+    Riot.run @@ fun () -> fetch_loop ()
