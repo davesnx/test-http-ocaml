@@ -18,8 +18,8 @@ let _ =
   else
     let server = Array.get Sys.argv 1 in
     let total = ref 0 in
-    let batch = 50 in
-    let until = 15_000 in
+    let batch = 10 in
+    let until = 100 in
 
     let make_calls _ =
       let tasks =

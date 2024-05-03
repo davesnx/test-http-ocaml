@@ -10,14 +10,16 @@ let () =
   else
     let server = Array.get Sys.argv 1 in
     let total = ref 0 in
-    let batch = 50 in
-    let until = 15_000 in
+    let batch = 10 in
+    let delay = 1.0 in
+    let until = 1000 in
 
     let rec fetch_loop ~sw env client =
       let batch_of_fetchers =
         List.init batch (fun _ -> fetch ~sw client server)
       in
       let usage = Mem_usage.info () in
+      Eio.Time.sleep env#clock delay;
       Eio.Fiber.List.iter (fun f -> f ()) batch_of_fetchers;
       total := !total + batch;
       Printf.printf "mem usage %s after %d fetch\n%!"
@@ -26,6 +28,7 @@ let () =
 
       if !total >= until then () else fetch_loop env client ~sw
     in
+
     Eio_main.run (fun env ->
         let client = Client.make ~https:None env#net in
         Eio.Switch.run (fun sw -> fetch_loop ~sw env client))
