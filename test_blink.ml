@@ -11,24 +11,20 @@ let fetch host =
       Printf.printf "error";
       Ok ()
 
-let _ =
-  if Array.length Sys.argv < 2 then Printf.printf "\nUsage: <server>\n"
-  else
-    let server = Array.get Sys.argv 1 in
-    let total = ref 0 in
-    let batch = 10 in
-    let until = 100 in
-    let rec fetch_loop () =
-      let tasks =
-        List.init batch (fun _ -> Riot.Task.async (fun () -> fetch server))
-      in
-      let usage = Mem_usage.info () in
-      List.iter (fun t -> Riot.Task.await t |> ignore) tasks;
-      total := !total + batch;
-      Printf.printf "mem usage %s after %d fetch\n%!"
-        (Mem_usage.prettify_bytes usage.process_private_memory)
-        !total;
-      if !total >= until then Riot.shutdown () else fetch_loop ()
+let () =
+  let Env.{ server; batch; until; delay = _ } = Env.setup_env Sys.argv in
+  let total = ref 0 in
+  let rec fetch_loop () =
+    let tasks =
+      List.init batch (fun _ -> Riot.Task.async (fun () -> fetch server))
     in
+    let usage = Mem_usage.info () in
+    List.iter (fun t -> Riot.Task.await t |> ignore) tasks;
+    total := !total + batch;
+    Printf.printf "mem usage %s after %d fetch\n%!"
+      (Mem_usage.prettify_bytes usage.process_private_memory)
+      !total;
+    if !total >= until then Riot.shutdown () else fetch_loop ()
+  in
 
-    Riot.run @@ fun () -> fetch_loop ()
+  Riot.run @@ fun () -> fetch_loop ()

@@ -15,8 +15,8 @@ help: ## Print this help message
 build: ## Build the project, including non installable libraries and executables
 	$(DUNE) build --promote-install-files --root .
 
-.PHONY: build-watch
-build-watch: ## Build the project, including non installable libraries and executables
+.PHONY: build_watch
+build_watch: ## Build the project, including non installable libraries and executables
 	$(DUNE) build --promote-install-files --root . --watch
 
 .PHONY: clean
@@ -27,8 +27,8 @@ clean: ## Clean artifacts
 fmt format: ## Formats code
 	$(DUNE) build @fmt --auto-promote
 
-.PHONY: create-switch
-create-switch: ## Create opam switch
+.PHONY: create_switch
+create_switch: ## Create opam switch
 	opam switch create . 5.1.1 --deps-only --with-test --no-install
 
 .PHONY: install
@@ -49,19 +49,19 @@ TEST_TARGETS := blink cohttp piaf
 # Create targets with the format "test_{{target_name}} nad test_{{target_name}}_{{ "watch" }}"
 define create_build
 .PHONY: $(1)
-build-$(1): ## Build $(1) tests
+build_$(1): ## Build $(1) tests
 	$$(DUNE) build test_$(1)
 endef
 
 define create_build_watch
-.PHONY: $(1)-watch
-build-$(1)-watch: ## Build $(1) tests
+.PHONY: $(1)_watch
+build_$(1)_watch: ## Build $(1) tests
 	$$(DUNE) build test_$(1) --watch
 endef
 
 define create_run_test
-.PHONY: test-$(1)
-test-$(1): ## Build $(1) tests
+.PHONY: test_$(1)
+test_$(1): ## Build $(1) tests
 	$$(DUNE) exec ./test_$(1).exe $(LOCALHOST)
 endef
 

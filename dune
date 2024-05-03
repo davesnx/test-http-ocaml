@@ -1,14 +1,29 @@
+(library
+ (name env)
+ (modules env))
+
 (executable
  (name test_cohttp)
  (modules test_cohttp)
- (libraries mem_usage uri cohttp cohttp-eio eio eio.core eio_main eio.unix tls tls-eio))
+ (libraries
+  env
+  mem_usage
+  uri
+  cohttp
+  cohttp-eio
+  eio
+  eio.core
+  eio_main
+  eio.unix
+  tls
+  tls-eio))
 
 (executable
  (name test_blink)
  (modules test_blink)
- (libraries mem_usage uri riot rio blink http))
+ (libraries env mem_usage uri riot rio blink http))
 
 (executable
-  (name test_piaf)
-  (modules test_piaf)
-  (libraries mem_usage uri piaf eio eio_main eio.core))
+ (name test_piaf)
+ (modules test_piaf)
+ (libraries env mem_usage uri piaf eio eio_main eio.core))
