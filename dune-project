@@ -36,4 +36,6 @@
   eio
   eio_main
   cohttp-eio
+  (piaf :pinned)
+  (blink :pinned)
 ))
