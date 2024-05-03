@@ -1,5 +1,3 @@
-open Riot
-
 let fetch host =
   let ( let* ) = Result.bind in
   let url = Uri.of_string host in
@@ -23,9 +21,9 @@ let _ =
 
     let make_calls _ =
       let tasks =
-        List.init batch (fun _ -> Task.async (fun () -> fetch server))
+        List.init batch (fun _ -> Riot.Task.async (fun () -> fetch server))
       in
-      List.map Task.await tasks |> ignore;
+      List.map Riot.Task.await tasks |> ignore;
       let usage = Mem_usage.info () in
       Printf.printf "mem usage %s after %d fetch\n%!"
         (Mem_usage.prettify_bytes usage.process_private_memory)
@@ -34,4 +32,4 @@ let _ =
 
     Riot.run @@ fun () ->
     let _ = List.init until make_calls in
-    shutdown ()
+    Riot.shutdown ()

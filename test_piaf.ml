@@ -1,9 +1,8 @@
-open Piaf
-
 let fetch ~sw env url () =
-  match Client.Oneshot.get ~sw env (Uri.of_string url) with
+  let config = Piaf.Config.default in
+  match Piaf.Client.Oneshot.get ~config ~sw env (Uri.of_string url) with
   | Ok _response -> ()
-  | Error e -> failwith (Error.to_string e)
+  | Error e -> failwith (Piaf.Error.to_string e)
 
 let () =
   if Array.length Sys.argv < 2 then Printf.printf "\nUsage: <server>\n"

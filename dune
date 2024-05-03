@@ -1,7 +1,7 @@
 (executable
  (name test_cohttp)
  (modules test_cohttp)
- (libraries mem_usage uri cohttp-eio eio eio.core eio_main eio.unix))
+ (libraries mem_usage uri cohttp cohttp-eio eio eio.core eio_main eio.unix tls tls-eio))
 
 (executable
  (name test_blink)

@@ -1,9 +1,6 @@
-project_name = test-http-ocaml
-
 OPAM_EXEC = opam exec --
-LOCALHOST = "http://localhost:8080"
+LOCALHOST = "http://127.0.0.1:8080/"
 DUNE = $(OPAM_EXEC) dune
-opam_file = $(project_name).opam
 
 .PHONY: help
 help: ## Print this help message
@@ -18,12 +15,13 @@ help: ## Print this help message
 build: ## Build the project, including non installable libraries and executables
 	$(DUNE) build --promote-install-files --root .
 
+.PHONY: build-watch
+build-watch: ## Build the project, including non installable libraries and executables
+	$(DUNE) build --promote-install-files --root . --watch
+
 .PHONY: clean
 clean: ## Clean artifacts
 	$(DUNE) clean
-
-.PHONY: deps
-deps: $(opam_file) ## Alias to update the opam file and install the needed deps
 
 .PHONY: format
 fmt format: ## Formats code
@@ -66,9 +64,9 @@ build-$(1)-watch: ## Build $(1) tests
 endef
 
 define create_run_test
-.PHONY: run-$(1)
-run-$(1): ## Build $(1) tests
-	$$(DUNE) exec ./test_$(1).exe
+.PHONY: test-$(1)
+test-$(1): ## Build $(1) tests
+	$$(DUNE) exec ./test_$(1).exe $(LOCALHOST)
 endef
 
 # Apply the create_watch_target rule for each test target

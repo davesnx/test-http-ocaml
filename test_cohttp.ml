@@ -1,8 +1,8 @@
-open Cohttp_eio
-
 let fetch ~sw client host () =
-  let url = Uri.of_string host in
-  let _resp, _body = Client.get ~sw client url in
+  let resp, _body = Cohttp_eio.Client.get ~sw client host in
+  if Http.Status.compare resp.status `OK = 0 then ()
+  else
+    Printf.printf "Error: %s\n%!" (resp.status |> Cohttp.Code.string_of_status);
   ()
 
 let () =
@@ -14,10 +14,8 @@ let () =
     let delay = 1.0 in
     let until = 1000 in
 
-    let rec fetch_loop ~sw env client =
-      let batch_of_fetchers =
-        List.init batch (fun _ -> fetch ~sw client server)
-      in
+    let rec fetch_loop ~sw env client url =
+      let batch_of_fetchers = List.init batch (fun _ -> fetch ~sw client url) in
       let usage = Mem_usage.info () in
       Eio.Time.sleep env#clock delay;
       Eio.Fiber.List.iter (fun f -> f ()) batch_of_fetchers;
@@ -26,9 +24,10 @@ let () =
         (Mem_usage.prettify_bytes usage.process_private_memory)
         !total;
 
-      if !total >= until then () else fetch_loop env client ~sw
+      if !total >= until then () else fetch_loop ~sw env client url
     in
 
     Eio_main.run (fun env ->
-        let client = Client.make ~https:None env#net in
-        Eio.Switch.run (fun sw -> fetch_loop ~sw env client))
+        let url = Uri.of_string server in
+        let client = Cohttp_eio.Client.make ~https:None env#net in
+        Eio.Switch.run (fun sw -> fetch_loop ~sw env client url))

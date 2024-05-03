@@ -1,7 +1,5 @@
 (lang dune 3.8)
 
-(cram enable)
-
 (name test-http-ocaml)
 
 (license MIT)
@@ -18,10 +16,9 @@
 (implicit_transitive_deps false)
 
 (package
- (allow_empty true)
  (name test-http-ocaml)
- (synopsis "test-http-ocaml ???")
- (description "test-http-ocaml ???")
+ (synopsis "A test-http-ocaml")
+ (description "A test-http-ocaml")
  (depends
   ocaml
   ocamlformat
@@ -36,6 +33,7 @@
   eio
   eio_main
   cohttp-eio
+  tiny_httpd
   (piaf :pinned)
   (blink :pinned)
 ))
