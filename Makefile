@@ -1,5 +1,5 @@
 OPAM_EXEC = opam exec --
-LOCALHOST = "http://127.0.0.1:8080/"
+LOCALHOST = "http://localhost:3000"
 DUNE = $(OPAM_EXEC) dune
 
 .PHONY: help
@@ -40,11 +40,7 @@ init: create-switch install ## Create a local dev enviroment
 
 .PHONY: serve
 serve: ## Run the server
-	$(DUNE) exec --no-print-directory test-http-ocaml.server
-
-.PHONY: serve-watch
-serve-watch: ## Run the server
-	$(DUNE) exec -w --no-print-directory test-http-ocaml.server
+	bun run lib/server.js
 
 # Testing commands
 

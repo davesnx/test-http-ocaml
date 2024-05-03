@@ -1,4 +1,0 @@
-(executable
- (name server)
- (public_name test-http-ocaml.server)
- (libraries tiny_httpd))
