@@ -24,7 +24,7 @@ let () =
         (Mem_usage.prettify_bytes usage.process_private_memory)
         !total;
 
-      if !total >= until then () else fetch_loop ~sw env client url
+      if !total >= until then exit 0 else fetch_loop ~sw env client url
     in
 
     Eio_main.run (fun env ->

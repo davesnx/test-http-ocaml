@@ -16,6 +16,7 @@
 (implicit_transitive_deps false)
 
 (package
+ (allow_empty true)
  (name test-http-ocaml)
  (synopsis "A test-http-ocaml")
  (description "A test-http-ocaml")
