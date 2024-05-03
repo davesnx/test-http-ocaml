@@ -19,21 +19,19 @@ let _ =
     let server = Array.get Sys.argv 1 in
     let total = ref 0 in
     let batch = 50 in
+    let until = 15_000 in
 
     let make_calls _ =
       let tasks =
         List.init batch (fun _ -> Task.async (fun () -> fetch server))
       in
-      Riot.sleep 0. |> ignore;
+      List.map Task.await tasks |> ignore;
       let usage = Mem_usage.info () in
-      let () =
-        Printf.printf "mem usage %s after %d fetch\n%!"
-          (Mem_usage.prettify_bytes usage.process_private_memory)
-          !total
-      in
-      List.map Task.await tasks |> ignore
+      Printf.printf "mem usage %s after %d fetch\n%!"
+        (Mem_usage.prettify_bytes usage.process_private_memory)
+        !total
     in
 
     Riot.run @@ fun () ->
-    let _ = List.init 300 make_calls in
+    let _ = List.init until make_calls in
     shutdown ()

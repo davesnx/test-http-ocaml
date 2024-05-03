@@ -16,14 +16,11 @@ let () =
     let rec fetch_loop env ~sw =
       let batch_of_fetchers = List.init batch (fun _ -> fetch ~sw env server) in
       let usage = Mem_usage.info () in
-      let () = Eio.Fiber.List.iter (fun f -> f ()) batch_of_fetchers in
+      Eio.Fiber.List.iter (fun f -> f ()) batch_of_fetchers;
       total := !total + batch;
-      let () =
-        Printf.printf "mem usage %s after %d fetch\n%!"
-          (Mem_usage.prettify_bytes usage.process_private_memory)
-          !total
-      in
-
+      Printf.printf "mem usage %s after %d fetch\n%!"
+        (Mem_usage.prettify_bytes usage.process_private_memory)
+        !total;
       if !total >= until then () else fetch_loop env ~sw
     in
     Eio_main.run (fun env -> Eio.Switch.run (fun sw -> fetch_loop env ~sw))
